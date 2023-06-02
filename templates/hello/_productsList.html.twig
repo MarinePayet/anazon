@@ -1,0 +1,28 @@
+{# {% for product in products %}        
+    {% if product.price is odd %}
+        <div>
+            <h2> {{ product.price|format_currency('EUR', {rounding_mode: 'floor'}, locale='fr')}} </h2>
+        </div>
+        <p> le prix est impair</p>
+        <hr>
+    {% else %}
+        <div>
+            <h2> {{ product.price|format_currency('EUR', {rounding_mode: 'floor'}, locale='fr') }} </h2>
+        </div>
+            Prix est pair.
+            <hr>
+    {% endif %}
+{% endfor %} #}
+
+{% for product in products %}        
+        <div>
+            <h2> {{ product.price|format_currency('EUR', {rounding_mode: 'floor'}, locale='fr')}} </h2>
+        </div>
+        <p> le prix est impair</p>
+        <hr>
+    {% else %}
+        <div>
+            <h2> {{ product.price|format_currency('EUR', {rounding_mode: 'floor'}, locale='fr') }} </h2>
+        </div>
+            Prix est pair.
+{% endfor %}

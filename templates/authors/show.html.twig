@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %} <h1> Les livres de : {{ author.name }} </h1> {% endblock %}
+
+{% block body %}
+
+    {% for book in author.books %}
+        <ul>
+            <li>
+                <section data-controller="accordion">
+                    <div >
+                        <h2 data-action="click->accordion#toggle"> {{ book.title }}</h2>
+                    </div>
+
+                    <div data-accordion-target="body" style="display:none">
+                    <p> _{{ book.description | raw }} </p>
+
+                </div>
+                </section>
+            </li>
+        </ul>
+
+    {% endfor %}
+
+{% endblock %}

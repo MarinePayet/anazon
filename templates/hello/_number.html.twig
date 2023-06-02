@@ -1,0 +1,12 @@
+<hr>
+
+{% if number is odd %}
+    <div class="backOdd"> 
+    Le chiffre {{ number }} est impair.
+    </div>
+{% else %}
+    <div class="backEven">
+        Le chiffre {{ number }} est pair.
+    </div>
+    <hr>
+{% endif %}

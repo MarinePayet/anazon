@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ name }}!{% endblock %}
+
+{% block body %}
+    <style>
+        .backOdd { background: pink }
+        .backEven { background: blue; color: white }
+        .backPdt { background: lightgrey }
+    </style>
+
+    <div>
+        <h1>Hello {{ name }}! </h1>
+    </div>
+
+    <div class="backPdt">
+        {% for product in products %}
+            <div class="backPdt">
+                <h2> {{ product.title }} => {{ product.price }}</h2>
+            </div>
+        {% endfor %}
+    </div>
+
+    {{ block('h2') }}
+
+    {% include "hello/_number.html.twig" %}
+
+    {% include "hello/_date.html.twig" %}
+
+    {{ 'Marine'|reverse }}
+
+    <hr>
+
+    {% include 'hello/_productsList.html.twig' %}
+
+{% endblock %}
+
+{% block footer %}{{ parent() }} Footer index {{ parent() }}{% endblock %}
