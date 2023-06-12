@@ -11,6 +11,7 @@
             <tr>
                 <th scope="col">Nom</th>
                 <th scope="col">#</th>
+                <th scope="col">#</th>
             </tr>
         </thead>
         <tbody>
@@ -22,11 +23,22 @@
                         Voir 
                         </a>
                     </td>
+                    <td> 
+                        <a href="{{ path('app_author_edit', {id: author.id}) }}" class='btn btn-primary'>
+                        Modif 
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
     
     </table>
 </div>
+
+<a href="{{path('app_author_new')}}">Nouvel auteur</a>
+<br>
+<a href="{{path('app_book_new')}}">Nouveau livre</a>
+
+
 
 {% endblock %}

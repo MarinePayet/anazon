@@ -18,7 +18,7 @@ class Author
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $books;
 
     public function __construct()
@@ -71,5 +71,10 @@ class Author
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

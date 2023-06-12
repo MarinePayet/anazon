@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel Auteur{% endblock %}
+
+{% block body %} 
+    <h1>Nouvel auteur</h1>
+    <div class="form-control container">
+    {{form(form)}}
+    </div>
+
+    <a href="{{path('app_authors')}}">Back</a>
+
+{% endblock %}

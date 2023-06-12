@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Modification de l'auteur :  {{author.name}} {% endblock %}
+
+{% block body %} 
+
+    <p> Modification de l'auteur :  {{author.name}} </p>
+
+    <div class="form-control form-label container">
+        {{form(form)}}
+    </div>
+
+<a href="{{path('app_authors')}}">Back</a>
+{% endblock %}

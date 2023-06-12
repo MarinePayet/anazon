@@ -14,6 +14,10 @@ import './styles/app.scss';
 const $ = require('jquery');
 require('bootstrap');
 
+import a2lix_lib from '@a2lix/symfony-collection/dist/a2lix_sf_collection.min'
+
+a2lix_lib.sfCollection.init()
+
 
 // export const app = startStimulusApp(require.context(
 //     '@symfony/stimulus-bridge/lazy-controller-loader!./controllers',
