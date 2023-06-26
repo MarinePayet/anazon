@@ -4,12 +4,16 @@
 
 {% block body %}
 
- {% block h2 %} Les auteurs h2 !  {% endblock %}
+ {% block h2 %} <h2 class="container">  Les auteurs ! </h2> {% endblock %}
+    <p class="container"> Nombre total d'auteurs : {{ authors.getTotalItemCount }}</p>
+
 <div class='container-sm'> 
     <table class='table table-striped'>
         <thead>
             <tr>
-                <th scope="col">Nom</th>
+                {# <th>{{ knp_pagination_sortable(authors, 'Nom', 'authors.name') }}</th> #}
+                <th scope="col" {% if authors.isSorted('a.name') %} class="sorted"{% endif %}>
+            {{ knp_pagination_sortable(authors, 'Nom', 'a.name') }}</th>
                 <th scope="col">#</th>
                 <th scope="col">#</th>
             </tr>
@@ -34,11 +38,14 @@
     
     </table>
 </div>
+<div class="navigation container">
+    {{ knp_pagination_render(authors) }}
+</div>
+<hr>
 
-<a href="{{path('app_author_new')}}">Nouvel auteur</a>
+<a class="container" href="{{path('app_author_new')}}">Nouvel auteur</a>
 <br>
-<a href="{{path('app_book_new')}}">Nouveau livre</a>
-
+<a class="container" href="{{path('app_book_new')}}">Nouveau livre</a>
 
 
 {% endblock %}

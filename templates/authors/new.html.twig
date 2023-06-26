@@ -5,9 +5,12 @@
 {% block body %} 
     <h1>Nouvel auteur</h1>
     <div class="form-control container">
-    {{form(form)}}
+
+        {{form(form, {attr: {novalidate: 'novalidate'}}) }}
+
     </div>
 
     <a href="{{path('app_authors')}}">Back</a>
 
 {% endblock %}
+

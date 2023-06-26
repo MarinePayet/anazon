@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\BookRepository;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
@@ -15,9 +16,23 @@ class Book
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        max: 255,
+        minMessage: 'Your first name must be at least 2 characters long',
+        maxMessage: 'Your first name cannot be longer than 255 characters',
+    )]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        max: 255,
+        minMessage: 'Your first name must be at least 2 characters long',
+        maxMessage: 'Your first name cannot be longer than 255 characters',
+    )]
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'books')]
@@ -63,5 +78,10 @@ class Book
         $this->author = $author;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
     }
 }

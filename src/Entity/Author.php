@@ -5,7 +5,9 @@ namespace App\Entity;
 use App\Repository\AuthorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Valid;
 
 #[ORM\Entity(repositoryClass: AuthorRepository::class)]
 class Author
@@ -16,9 +18,22 @@ class Author
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        max: 255,
+        minMessage: 'Le nom doit être d\'au moins 2 caractères ',
+        maxMessage: 'Le nom doit être de moins de 255 caractères',
+    )]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class, orphanRemoval: true, cascade: ['persist'])]
+    #[Assert\Valid()]
+    #[Assert\Count(
+        min: 1,
+        minMessage: 'Vous devez ajouter au moins un livre',
+    )]
+
     private Collection $books;
 
     public function __construct()
