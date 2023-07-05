@@ -8,10 +8,14 @@ use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Valid;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: AuthorRepository::class)]
 class Author
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -26,6 +30,10 @@ class Author
         maxMessage: 'Le nom doit être de moins de 255 caractères',
     )]
     private ?string $name = null;
+
+    #[ORM\Column(length: 128, unique: true)]
+    #[Gedmo\Slug(fields: ['name'])]
+    private $slug;
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class, orphanRemoval: true, cascade: ['persist'])]
     #[Assert\Valid()]
@@ -93,3 +101,4 @@ class Author
         return $this->getName();
     }
 }
+

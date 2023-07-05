@@ -6,6 +6,7 @@ use App\Entity\Author;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 /**
  * @extends ServiceEntityRepository<Author>
  *
@@ -14,6 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Author[]    findAll()
  * @method Author[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+
 class AuthorRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -37,6 +39,15 @@ class AuthorRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findAuthorBookWithTitle(string $title){
+        return $this->createQuerybuilder('a')
+                        ->innerjoin('a.books', 'b')
+                        ->andWhere('b.title LIKE :title')
+                        ->setParameter('title', '%'.$title.'%')
+                        ->getQuery()
+                        ->getResult();
     }
 
 //    /**

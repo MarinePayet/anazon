@@ -18,11 +18,20 @@ class AuthorsController extends AbstractController
     public function index(AuthorRepository $authorRepository, PaginatorInterface $paginator, Request $request ): Response
     {        
 
+        
+        //avec un filtre défini au départ
         $pagination = $paginator->paginate(
-            $authorRepository->createQueryBuilder('a'), 
+            $authorRepository->findAuthorBookWithTitle('c'), 
             $request->query->getInt('page', 1), 
             2
         );
+
+        //sans filtre en particulier
+        // $pagination = $paginator->paginate(
+        //     $authorRepository->createQueryBuilder('a'), 
+        //     $request->query->getInt('page', 1), 
+        //     2
+        // );
 
         return $this->render('authors/index.html.twig', [
 
@@ -84,3 +93,4 @@ class AuthorsController extends AbstractController
 
 
 }
+
